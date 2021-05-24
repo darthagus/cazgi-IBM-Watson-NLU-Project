@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/url/emotion", (req, res) => {
-
+    console.log('en url/emotion');
     return res.send({
         "happy": "90",
         "sad": "10"
@@ -41,10 +41,12 @@ app.get("/url/emotion", (req, res) => {
 });
 
 app.get("/url/sentiment", (req, res) => {
+    console.log('en url/sentiment');
     return res.send("url sentiment for " + req.query.url);
 });
 
 app.get("/text/emotion", (req, res) => {
+    console.log('en text/emotion');
     return res.send({
         "happy": "10",
         "sad": "90"
@@ -52,6 +54,7 @@ app.get("/text/emotion", (req, res) => {
 });
 
 app.get("/text/sentiment", (req, res) => {
+    console.log('en text/sentiment');
     return res.send("text sentiment for " + req.query.text);
 });
 
