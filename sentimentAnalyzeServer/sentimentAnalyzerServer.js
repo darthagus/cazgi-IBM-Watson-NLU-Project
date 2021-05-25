@@ -33,29 +33,103 @@ app.get("/", (req, res) => {
 });
 
 app.get("/url/emotion", (req, res) => {
-    console.log('en url/emotion');
-    return res.send({
-        "happy": "90",
-        "sad": "10"
-    });
+    console.log(req.query);
+    const url = req.query.url;
+    if (req.query.url) {
+        getNLUInstance().analyze({
+                'url': url,
+                'features': {
+                    'entities': {
+                        'emotion': true,
+                        'sentiment': false,
+                        'limit': 2,
+                    }
+                }
+            })
+            .then(analysisResults => {
+                console.log(JSON.stringify(analysisResults, null, 2));
+                return res.send(analysisResults);
+            })
+            .catch(err => {
+                console.log('error', err);
+            });
+    };
+
 });
 
 app.get("/url/sentiment", (req, res) => {
-    console.log('en url/sentiment');
-    return res.send("url sentiment for " + req.query.url);
+    console.log(req.query);
+    const url = req.query.url;
+    if (req.query.url) {
+        getNLUInstance().analyze({
+                'url': url,
+                'features': {
+                    'entities': {
+                        'emotion': false,
+                        'sentiment': true,
+                        'limit': 2,
+                    }
+                }
+            })
+            .then(analysisResults => {
+                console.log(JSON.stringify(analysisResults, null, 2));
+                return res.send(analysisResults);;
+            })
+            .catch(err => {
+                console.log('error', err);
+            });
+    };
+
 });
 
 app.get("/text/emotion", (req, res) => {
-    console.log('en text/emotion');
-    return res.send({
-        "happy": "10",
-        "sad": "90"
-    });
+    console.log(req.query);
+    const text = req.query.text;
+    if (req.query.text) {
+        getNLUInstance().analyze({
+                'text': text,
+                'features': {
+                    'entities': {
+                        'emotion': true,
+                        'sentiment': false,
+                        'limit': 2,
+                    }
+                }
+            })
+            .then(analysisResults => {
+                console.log(JSON.stringify(analysisResults, null, 2));
+                return res.send(analysisResults);
+            })
+            .catch(err => {
+                console.log('error', err);
+            });
+    };
+
 });
 
 app.get("/text/sentiment", (req, res) => {
-    console.log('en text/sentiment');
-    return res.send("text sentiment for " + req.query.text);
+    console.log(req.query);
+    const text = req.query.text;
+    if (req.query.text) {
+        getNLUInstance().analyze({
+                'text': text,
+                'features': {
+                    'entities': {
+                        'emotion': false,
+                        'sentiment': true,
+                        'limit': 2,
+                    }
+                }
+            })
+            .then(analysisResults => {
+                console.log(JSON.stringify(analysisResults, null, 2));
+                return res.send(analysisResults);
+            })
+            .catch(err => {
+                console.log('error', err);
+            });
+    };
+
 });
 
 let server = app.listen(8080, () => {
