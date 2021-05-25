@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/url/emotion", (req, res) => {
-    console.log(req.query);
     const url = req.query.url;
     if (req.query.url) {
         getNLUInstance().analyze({
@@ -47,7 +46,6 @@ app.get("/url/emotion", (req, res) => {
                 }
             })
             .then(analysisResults => {
-                console.log(JSON.stringify(analysisResults, null, 2));
                 return res.send(analysisResults);
             })
             .catch(err => {
@@ -58,7 +56,6 @@ app.get("/url/emotion", (req, res) => {
 });
 
 app.get("/url/sentiment", (req, res) => {
-    console.log(req.query);
     const url = req.query.url;
     if (req.query.url) {
         getNLUInstance().analyze({
@@ -72,7 +69,6 @@ app.get("/url/sentiment", (req, res) => {
                 }
             })
             .then(analysisResults => {
-                console.log(JSON.stringify(analysisResults, null, 2));
                 return res.send(analysisResults);;
             })
             .catch(err => {
@@ -83,7 +79,6 @@ app.get("/url/sentiment", (req, res) => {
 });
 
 app.get("/text/emotion", (req, res) => {
-    console.log(req.query);
     const text = req.query.text;
     if (req.query.text) {
         getNLUInstance().analyze({
@@ -97,7 +92,6 @@ app.get("/text/emotion", (req, res) => {
                 }
             })
             .then(analysisResults => {
-                console.log(JSON.stringify(analysisResults, null, 2));
                 return res.send(analysisResults);
             })
             .catch(err => {
@@ -108,7 +102,6 @@ app.get("/text/emotion", (req, res) => {
 });
 
 app.get("/text/sentiment", (req, res) => {
-    console.log(req.query);
     const text = req.query.text;
     if (req.query.text) {
         getNLUInstance().analyze({
@@ -122,7 +115,6 @@ app.get("/text/sentiment", (req, res) => {
                 }
             })
             .then(analysisResults => {
-                console.log(JSON.stringify(analysisResults, null, 2));
                 return res.send(analysisResults);
             })
             .catch(err => {
