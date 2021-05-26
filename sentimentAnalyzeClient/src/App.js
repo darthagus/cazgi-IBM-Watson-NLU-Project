@@ -79,9 +79,9 @@ class App extends React.Component {
     ret.then((response) => {
       console.log(response.data.result.entities);
       if (Array.isArray(response.data.result.entities) && response.data.result.entities.length) {
-        this.setState({ sentimentOutput: null})
-      } else {
         this.setState({ sentimentOutput: <EmotionTable emotions={response.data.result.entities[0].emotion} /> });
+      } else {
+        this.setState({ sentimentOutput: null})
       }
   });
   }
