@@ -45,9 +45,10 @@ class App extends React.Component {
       url = url+"/text/sentiment?text="+document.getElementById("textinput").value;
     }
     ret = axios.get(url);
-    ret.then((response)=>{
-      //Include code here to check the sentiment and fomrat the data accordingly
-      if (response.data.result.entities[0]) {
+    ret.then((response) => {
+      console.log(response.data.result.entities);
+      //Include code here to check the sentiment and fomrat the data accordinglyd
+      if (Array.isArray(response.data.result.entities) && response.data.result.entities.length) {
       /* this.setState({sentimentOutput:response.data.result.entities[0]}); */
       let output = response.data.result.entities[0];
       let result = JSON.stringify(response.data.result.entities[0]);
@@ -76,8 +77,10 @@ class App extends React.Component {
     ret = axios.get(url);
 
     ret.then((response) => {
-      if (response.data.result.entities[0].emotion) {
-        console.log(response.data.result.entities[0].emotion);
+      console.log(response.data.result.entities);
+      if (Array.isArray(response.data.result.entities) && response.data.result.entities.length) {
+        this.setState({ sentimentOutput: null})
+      } else {
         this.setState({ sentimentOutput: <EmotionTable emotions={response.data.result.entities[0].emotion} /> });
       }
   });
