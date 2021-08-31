@@ -1,4 +1,3 @@
-
 import './bootstrap.min.css';
 import './App.css';
 import EmotionTable from './EmotionTable.js';
