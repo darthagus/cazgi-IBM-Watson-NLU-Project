@@ -75,7 +75,7 @@ class App extends React.Component {
     ret = axios.get(url);
 
     ret.then((response) => {
-      console.log(response.data.result.entities);
+      console.log(response.data.entities);
       if (Array.isArray(response.data.result.entities) && response.data.result.entities.length>0) {
         this.setState({ sentimentOutput: <EmotionTable emotions={response.data.result.entities[0].emotion} /> });
       } else {
