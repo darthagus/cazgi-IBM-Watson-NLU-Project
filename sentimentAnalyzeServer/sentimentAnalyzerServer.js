@@ -69,7 +69,7 @@ app.get("/url/sentiment", (req, res) => {
                 }
             })
             .then(analysisResults => {
-                return res.send(analysisResults);;
+                return res.send(analysisResults);
             })
             .catch(err => {
                 console.log('error', err);
