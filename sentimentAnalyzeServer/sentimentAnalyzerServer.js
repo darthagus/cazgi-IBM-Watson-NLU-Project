@@ -38,7 +38,7 @@ app.get("/url/emotion", (req, res) => {
         getNLUInstance().analyze({
                 'url': url,
                 'features': {
-                    'entities': {
+                    'keywords': {
                         'emotion': true,
                         'sentiment': false,
                         'limit': 2,
@@ -84,7 +84,7 @@ app.get("/text/emotion", (req, res) => {
         getNLUInstance().analyze({
                 'text': text,
                 'features': {
-                    'entities': {
+                    'keywords': {
                         'emotion': true,
                         'sentiment': false,
                         'limit': 2,
@@ -107,8 +107,7 @@ app.get("/text/sentiment", (req, res) => {
         getNLUInstance().analyze({
                 'text': text,
                 'features': {
-                    'entities': {
-                        'emotion': false,
+                    'keywords': {
                         'sentiment': true,
                         'limit': 2,
                     }

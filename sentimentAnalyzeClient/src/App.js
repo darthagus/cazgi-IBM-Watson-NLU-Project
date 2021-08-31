@@ -45,15 +45,21 @@ class App extends React.Component {
     }
     ret = axios.get(url);
     ret.then((response) => {
-      /* console.log(response.data.result.entities); */
-      //Include code here to check the sentiment and fomrat the data accordinglyd
-      if (Array.isArray(response.data.result.entities) && response.data.result.entities.length) {
+      //Include code here to check the sentiment and fomrat the data accordingly
+      var results;
+      if (response.data.result.entities === null || response.data.result.entities === undefined) {
+        results = response.data.result.keywords;
+      } else {
+        results = response.data.result.entities;
+      }
+      console.log(results);
+      if (Array.isArray(results) && results.length) {
       /* this.setState({sentimentOutput:response.data.result.entities[0]}); */
-      let result = JSON.stringify(response.data.result.entities[0]);
+      let result = JSON.stringify(results[0]);
         var output;
-        if (response.data.result.entities[0].sentiment.label === "positive") {
+        if (results[0].sentiment.label === "positive") {
           output = <div style={{ color: "green", fontSize: 20 }}>{result}</div>
-        } else if (response.data.result.entities[0].sentiment.label === "negative") {
+        } else if (results[0].sentiment.label === "negative") {
           output = <div style={{ color: "red", fontSize: 20 }}>{result}</div>
         } else {
           output = <div style={{ color: "yellow", fontSize: 20 }}>{result}</div>
@@ -75,9 +81,15 @@ class App extends React.Component {
     ret = axios.get(url);
 
     ret.then((response) => {
-      console.log(response.data.entities);
-      if (Array.isArray(response.data.result.entities) && response.data.result.entities.length>0) {
-        this.setState({ sentimentOutput: <EmotionTable emotions={response.data.result.entities[0].emotion} /> });
+      var results;
+      if (response.data.result.entities === null || response.data.result.entities === undefined) {
+        results = response.data.result.keywords;
+      } else {
+        results = response.data.result.entities;
+      }
+      console.log(results);
+      if (Array.isArray(results) && results.length>0) {
+        this.setState({ sentimentOutput: <EmotionTable emotions={results[0].emotion} /> });
       } else {
         this.setState({ sentimentOutput: null})
       }
